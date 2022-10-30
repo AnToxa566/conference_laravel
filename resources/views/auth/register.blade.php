@@ -26,12 +26,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="last-name" class="col-md-4 col-form-label text-md-end">{{ __('Last name') }}<span class="text-danger">*</span></label>
+                            <label for="last_name" class="col-md-4 col-form-label text-md-end">{{ __('Last name') }}<span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="last-name" type="text" class="form-control @error('last-name') is-invalid @enderror" name="last-name" value="{{ old('last-name') }}" required autocomplete="last-name" autofocus>
+                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
 
-                                @error('last-name')
+                                @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -43,7 +43,7 @@
                             <label for="birthdate" class="col-md-4 col-form-label text-md-end">{{ __('Birthdate') }}<span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="birthdate" type="date" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" min="{{ date('Y-m-d') }}" value="{{ old('birthdate') }}" required autocomplete="birthdate" autofocus>
+                                <input id="birthdate" type="date" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" max="{{ date('Y-m-d') }}" value="{{ old('birthdate') }}" required autocomplete="birthdate" autofocus>
 
                                 @error('birthdate')
                                     <span class="invalid-feedback" role="alert">
@@ -61,7 +61,7 @@
                                     <option value="" disabled selected>{{ __('Choose country') }}</option>
 
                                     @foreach($countries as $country)
-                                        <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                        <option value="{{ $country->name }}">{{ $country->name }}</option>
                                     @endforeach                                       
                                 </select>
 

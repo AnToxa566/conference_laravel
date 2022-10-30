@@ -15,12 +15,10 @@ country_code.addEventListener('change', (e) => {
         mask: phone_code + ' (000) 000-0000'
     };
 
-    if (!mask)
-    {
+    if (!mask) {
         mask = IMask(input, maskOptions);
     }
-    else
-    {
+    else {
         mask.updateOptions(maskOptions);
         mask.updateValue();
     }
