@@ -20,8 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/conferences', [App\Http\Controllers\ConferenceController::class, 'index'])->name('conference.index');
+Route::get('/conferences/create', [App\Http\Controllers\ConferenceController::class, 'create'])->name('conference.create');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/conferences', [App\Http\Controllers\ConferenceController::class, 'store'])->name('conference.store');
