@@ -27,7 +27,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('conferences.index') }}">
                     {{ config('app.name', 'Confy') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -83,5 +83,8 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Google Maps API JS -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUH_gJhMm19A-BF1KDzmtNX7eiaZbpW1g&callback=initMap&v=weekly" defer></script>
 </body>
 </html>

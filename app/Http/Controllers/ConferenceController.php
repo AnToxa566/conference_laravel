@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Conference;
 use App\Models\Country;
+use Illuminate\Support\Facades\Validator;
 
 class ConferenceController extends Controller
 {
@@ -39,9 +40,7 @@ class ConferenceController extends Controller
 
     public function store()
     {
-        //dd('I Love my Miracle');
-
-        $date = request()->validate([
+        $data = request()->validate([
             'title' => ['required', 'string', 'min:2', 'max:255'],
             'date' => ['required', 'date', 'after_or_equal:today'],
             'time' => ['required'],
@@ -51,13 +50,54 @@ class ConferenceController extends Controller
         ]);
 
         Conference::create([
-            'title' => $date['title'],
-            'date_time_event' => $date['date'] . ' ' . $date['time'],
-            'latitude' => $date['longitude'] == null ? null : $date['latitude'],
-            'longitude' => $date['latitude'] == null ? null : $date['longitude'],
-            'country' => $date['country'],
+            'title' => $data['title'],
+            'date_time_event' => $data['date'] . ' ' . $data['time'],
+            'latitude' => $data['longitude'] == null ? null : $data['latitude'],
+            'longitude' => $data['latitude'] == null ? null : $data['longitude'],
+            'country' => $data['country'],
         ]);
 
-        return redirect()->route('conference.index');
+        return redirect()->route('conferences.index');
+    }
+
+    public function show(Conference $conference)
+    {
+        return view('conference.show', compact('conference'));
+    }
+
+    public function edit(Conference $conference)
+    {
+        $countries = Country::all();
+
+        return view('conference.edit', compact('conference', 'countries'));
+    }
+
+    public function update(Conference $conference)
+    {
+        $data = request()->validate([
+            'title' => ['required', 'string', 'min:2', 'max:255'],
+            'date' => ['required', 'date', 'after_or_equal:today'],
+            'time' => ['required'],
+            'latitude' => ['nullable'],
+            'longitude' => ['nullable'],
+            'country' => ['required', 'string', 'max:255'],
+        ]);
+
+        $conference->update([
+            'title' => $data['title'],
+            'date_time_event' => $data['date'] . ' ' . $data['time'],
+            'latitude' => $data['longitude'] == null ? null : $data['latitude'],
+            'longitude' => $data['latitude'] == null ? null : $data['longitude'],
+            'country' => $data['country'],
+        ]);
+
+        return redirect()->route('conferences.show', $conference->id);
+    }
+
+    public function destroy(Conference $conference)
+    {
+        $conference->delete();
+
+        return redirect()->route('conferences.index');
     }
 }

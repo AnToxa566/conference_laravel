@@ -6,7 +6,7 @@
 		<div class="col-9" style="font-size: 32px;">{{ __('Conferences') }}</div>
 
 		<div class="col-3">
-			<a href="#">
+			<a href="{{ route('conferences.create') }}">
 				<button type="button" class="btn btn-primary p-2 rounded shadow-sm w-100" style="font-size: 14px;">{{ __('Create a conference') }}</button>
 			</a>
 		</div>
@@ -17,7 +17,7 @@
 			<div class="conference shadow p-4 px-5 mb-4 rounded">
 				<div class="row align-items-center">
 					<div class="col-8 text-left">
-						<a href="#" class="conference_title mb-3 text-decoration-none text-body d-block" style="font-size: 20px;">
+						<a href="{{ route('conferences.show', $conference->id) }}" class="conference_title mb-3 text-decoration-none text-body d-block" style="font-size: 20px;">
 							{{ $conference->title }}
 						</a>
 

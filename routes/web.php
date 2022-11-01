@@ -20,7 +20,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/conferences', [App\Http\Controllers\ConferenceController::class, 'index'])->name('conference.index');
-Route::get('/conferences/create', [App\Http\Controllers\ConferenceController::class, 'create'])->name('conference.create');
+Route::get('/conferences', [App\Http\Controllers\ConferenceController::class, 'index'])->name('conferences.index');
+Route::get('/conferences/create', [App\Http\Controllers\ConferenceController::class, 'create'])->name('conferences.create');
 
-Route::post('/conferences', [App\Http\Controllers\ConferenceController::class, 'store'])->name('conference.store');
+Route::post('/conferences', [App\Http\Controllers\ConferenceController::class, 'store'])->name('conferences.store');
+
+Route::get('/conferences/{conference}', [App\Http\Controllers\ConferenceController::class, 'show'])->name('conferences.show');
+Route::get('/conferences/{conference}/edit', [App\Http\Controllers\ConferenceController::class, 'edit'])->name('conferences.edit');
+
+Route::patch('/conferences/{conference}', [App\Http\Controllers\ConferenceController::class, 'update'])->name('conferences.update');
+Route::delete('/conferences/{conference}', [App\Http\Controllers\ConferenceController::class, 'destroy'])->name('conferences.destroy');
