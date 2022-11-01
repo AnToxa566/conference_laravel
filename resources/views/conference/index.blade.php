@@ -13,6 +13,10 @@
 	</div>
 
 	<div>
+		{{ $conferences->links() }}
+	</div>
+
+	<div>
 		@foreach ($conferences as $conference)
 			<div class="conference shadow p-4 px-5 mb-4 rounded">
 				<div class="row align-items-center">
@@ -21,26 +25,30 @@
 							{{ $conference->title }}
 						</a>
 
-						<p class="conference_date mb-3" style="font-size: 18px;"> 
-                            {{ date('H:i Y-m-d', strtotime($conference->date_time_event)) }}
+						<p class="conference_date m-0" style="font-size: 16px;"> 
+                            {{__('Date: ')}} {{ date('Y-m-d (D)', strtotime($conference->date_time_event)) }}
 						</p>
 
-						<p class="conference_address text-muted">
+						<p class="conference_date mb-3" style="font-size: 16px;"> 
+                            {{__('Time: ')}} {{ date('H:i', strtotime($conference->date_time_event)) }}
+						</p>
+
+						<p class="conference_address text-muted m-0" style="font-size: 14px;">
                             {{ $conference->country }}
 						</p>
 					</div>
 
 					<div class="col-2">
 						<a href="#">
-							<button type="button" class="conference_btn btn d-none btn-primary p-2 rounded shadow-sm w-100" style="font-size: 14px;">
+							<button type="button" class="conference_btn btn btn-primary p-2 rounded shadow-sm w-100" style="font-size: 14px;">
                                 {{ __('Join') }}
 							</button>
 						</a>
 					</div>
 					
 					<div class="col-2">
-						<a href="#" data-toggle="modal">
-							<button type="button" class="conference_btn btn d-none btn-primary p-2 rounded shadow-sm w-100" style="font-size: 14px;">
+						<a href="{{ route('conferences.show', $conference->id) }}" data-toggle="modal">
+							<button type="button" class="conference_btn btn btn-primary p-2 rounded shadow-sm w-100" style="font-size: 14px;">
                                 {{ __('Details') }}
 							</button>
 						</a>  
@@ -48,6 +56,10 @@
 				</div>				
 			</div>
 		@endforeach
+	</div>
+
+	<div>
+		{{ $conferences->links() }}
 	</div>
 </div>
 @endsection

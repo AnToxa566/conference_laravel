@@ -26,7 +26,7 @@ class ConferenceController extends Controller
      */
     public function index()
     {
-        $conferences = Conference::all();
+        $conferences = Conference::paginate(15);
 
         return view('conference.index', compact('conferences'));
     }

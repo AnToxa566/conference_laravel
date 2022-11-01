@@ -1229,6 +1229,7 @@ class CountriesTableSeeder extends Seeder
             ],
         ];
 
+        Country::truncate();
         Country::insert($countries);
     }
 }

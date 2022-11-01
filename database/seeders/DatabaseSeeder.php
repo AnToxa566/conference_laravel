@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            CountriesTableSeeder::class,
+            //CountriesTableSeeder::class,
+            ConferencesTableSeeder::class,
         ]);
     }
 }
