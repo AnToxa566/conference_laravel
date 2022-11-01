@@ -14,7 +14,7 @@
 			<div class="col-2">{{ __('Title') }}<span class="text-danger">*</span></div>
 
 			<div class="col-10">
-				<input id="title" type="text" name="title" class="form-control" value="{{ $conference->title }}" required>
+				<input id="title" type="text" name="title" class="form-control" minlength="2" maxlength="255" value="{{ $conference->title }}" required>
 			</div>
 		</div>
 
@@ -148,6 +148,15 @@
 
 			<div class="col-2">
 				<input type="submit" name="submit" value="Save" class="btn btn-primary p-2 rounded shadow-sm w-100" style="font-size: 14px;"/>
+			</div>
+
+			<div class="col-2">
+				<form action="{{ route('conferences.destroy', $conference->id) }}" method="POST">
+					@csrf
+					@method('delete')
+
+					<input type="submit" value="Delete" class="btn btn-danger p-2 rounded shadow-sm w-100" style="font-size: 14px;">
+				</form>
 			</div>
 		</div>
 	</form>

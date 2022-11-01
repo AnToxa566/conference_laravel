@@ -9,20 +9,22 @@
 		</div>
 
 		<div class="row px-5 pb-4 mb-4 border-bottom">
-			<div class="col-3 font-weight-bold text-muted">{{__('Time')}}</div>
-			<div class="col-9">{{ date('H:i Y-m-d', strtotime($conference->date_time_event)) }}</div>
+			<div class="col-3 font-weight-bold text-muted">{{__('Date')}}</div>
+			<div class="col-9">{{ date('Y-m-d, l', strtotime($conference->date_time_event)) }}</div>
 		</div>
 
+		<div class="row px-5 pb-4 mb-4 border-bottom">
+			<div class="col-3 font-weight-bold text-muted">{{__('Time')}}</div>
+			<div class="col-9">{{ date('H:i', strtotime($conference->date_time_event)) }}</div>
+		</div>
+
+		@if ($formatted_address != NULL)
 		<div class="row px-5 pb-4 mb-4 border-bottom">
 			<div class="col-3 font-weight-bold text-muted">{{__('Address')}}</div>
 
 			<div class="col-9">
 				<p class="mb-4">
-					@if ($conference->latitude == NULL || $conference->longitude == NULL)
-						Адрес не установлен
-					@else
-						{{ "lat: " . $conference->latitude . ", long: " . $conference->longitude }}
-					@endif
+					{{ $formatted_address }}
 				</p>
 
 				<div id="map" class="shadow-sm rounded" style="height: 300px"></div>
@@ -58,6 +60,7 @@
 				</script>
 			</div>
 		</div>
+		@endif
 
 		<div class="row px-5 pb-4 mb-4 border-bottom">
 			<div class="col-3 font-weight-bold text-muted">{{__('Country')}}</div>

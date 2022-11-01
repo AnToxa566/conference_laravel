@@ -19,6 +19,26 @@ class ConferenceController extends Controller
         $this->middleware('auth');
     }
 
+    protected function getAddress($lat, $lng)
+    {
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$lng.'&key=AIzaSyAUH_gJhMm19A-BF1KDzmtNX7eiaZbpW1g';
+
+        $json = file_get_contents($url);
+        return json_decode($json);
+    }
+
+    protected function hasLatlng(Conference $conference)
+    {
+        if ($conference->latitude == NULL || $conference->longitude == NULL)
+        {
+            return False;
+        }
+        else
+        {
+            return True;
+        }
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -62,7 +82,23 @@ class ConferenceController extends Controller
 
     public function show(Conference $conference)
     {
-        return view('conference.show', compact('conference'));
+        $formatted_address = NULL;
+
+        if (ConferenceController::hasLatlng($conference))
+        {
+            $address = ConferenceController::getAddress($conference->latitude, $conference->longitude);
+
+            if ($address && $address->status == 'OK') 
+            {
+                $formatted_address = $address->results[0]->formatted_address;
+            }
+            else
+            {
+                $formatted_address = 'Undefined';
+            }
+        }
+
+        return view('conference.show', compact('conference', 'formatted_address'));
     }
 
     public function edit(Conference $conference)
