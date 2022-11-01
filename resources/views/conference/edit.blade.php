@@ -149,16 +149,16 @@
 			<div class="col-2">
 				<input type="submit" name="submit" value="Save" class="btn btn-primary p-2 rounded shadow-sm w-100" style="font-size: 14px;"/>
 			</div>
-
-			<div class="col-2">
-				<form action="{{ route('conferences.destroy', $conference->id) }}" method="POST">
-					@csrf
-					@method('delete')
-
-					<input type="submit" value="Delete" class="btn btn-danger p-2 rounded shadow-sm w-100" style="font-size: 14px;">
-				</form>
-			</div>
 		</div>
 	</form>
+
+	<div class="col-2">
+		<form action="{{ route('conferences.destroy', $conference->id) }}" method="POST">
+			@csrf
+			@method('delete')
+
+			<input type="submit" value="Delete" class="btn btn-danger p-2 rounded shadow-sm w-100" style="font-size: 14px;">
+		</form>
+	</div>
 </div>
 @endsection

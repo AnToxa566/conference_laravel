@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             //CountriesTableSeeder::class,
-            ConferencesTableSeeder::class,
+            //ConferencesTableSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }

@@ -16,7 +16,7 @@ class ConferenceController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index');
     }
 
     protected function getAddress($lat, $lng)
