@@ -18,8 +18,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->dateTime('date_time_event');
-            $table->float('latitude');
-            $table->float('longitude');
+            $table->float('latitude', 8, 4);
+            $table->float('longitude', 8, 4);
             $table->string('country');
             $table->timestamps();
         });

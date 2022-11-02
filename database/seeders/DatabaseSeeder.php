@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CountriesTableSeeder::class,
             ConferencesTableSeeder::class,
             AdminSeeder::class,
+            UsersTableSeeder::class
         ]);
     }
 }

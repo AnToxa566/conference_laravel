@@ -157,7 +157,7 @@
 
 		<div class="row">
 			<div class="col-2">
-				<a href="#">
+				<a href="{{ url()->previous() }}">
 					<button type="button" class="btn btn-primary p-2 rounded shadow-sm w-100" style="font-size: 14px;">{{ __('Back') }}</button>
 				</a>
 			</div>
