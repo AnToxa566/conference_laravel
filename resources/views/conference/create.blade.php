@@ -12,7 +12,13 @@
 			<div class="col-2">{{ __('Title') }}<span class="text-danger">*</span></div>
 
 			<div class="col-10">
-				<input id="title" type="text" name="title" class="form-control" minlength="2" maxlength="255" required>
+				<input id="title" type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" minlength="2" maxlength="255" required>
+
+				@error('title')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 		</div>
 
@@ -20,11 +26,23 @@
 			<div class="col-2">{{ __('When') }}<span class="text-danger">*</span></div>
 
 			<div class="col-5">
-				<input id="date" type="date" name="date" class="form-control" min="{{ date('Y-m-d'); }}" required>
+				<input id="date" type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}" min="{{ date('Y-m-d'); }}" required>
+
+				@error('date')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 
 			<div class="col-5">
-				<input id="time" type="time" name="time" class="form-control" required>
+				<input id="time" type="time" name="time" class="form-control @error('time') is-invalid @enderror" value="{{ old('time') }}" required>
+
+				@error('time')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 		</div>
 
@@ -32,19 +50,31 @@
 			<div class="col-2">{{ __('Address') }}</div>
 
 			<div class="col-5">
-				<input id="latitude" type="number" name="latitude" class="form-control"
+				<input id="latitude" type="number" name="latitude" class="form-control @error('latitude') is-invalid @enderror" value="{{ old('latitude') }}"
 					   oninput="updateMap()"
 					   min="-85" max="85"
 					   step="0.0001"
 					   placeholder="Latitude">
+
+				@error('latitude')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 
 			<div class="col-5">
-				<input id="longitude" type="number" name="longitude" class="form-control"
+				<input id="longitude" type="number" name="longitude" class="form-control @error('longitude') is-invalid @enderror" value="{{ old('longitude') }}"
 					   oninput="updateMap()"
 					   min="-180" max="180"
 					   step="0.0001"
 					   placeholder="Longitude">
+
+				@error('longitude')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 		</div>
 
@@ -109,13 +139,19 @@
 			<div class="col-2">{{ __('Country') }}<span class="text-danger">*</span></div>
 
 			<div class="col-10">
-				<select id="country" class="form-select" name="country" required>
-				    <option disabled selected>{{ __('Choose country') }}</option>
+				<select id="country" class="form-select @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}" required>
+				    <option value="" disabled selected>{{ __('Choose country') }}</option>
 
 				    @foreach ($countries as $country)
 				    	<option value="{{ $country->name }}">{{ $country->name }}</option>
 				    @endforeach
 				</select>
+
+				@error('country')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 		</div>
 

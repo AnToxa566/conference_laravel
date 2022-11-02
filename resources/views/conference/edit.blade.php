@@ -14,7 +14,13 @@
 			<div class="col-2">{{ __('Title') }}<span class="text-danger">*</span></div>
 
 			<div class="col-10">
-				<input id="title" type="text" name="title" class="form-control" minlength="2" maxlength="255" value="{{ $conference->title }}" required>
+				<input id="title" type="text" name="title" class="form-control @error('title') is-invalid @enderror" minlength="2" maxlength="255" value="{{ $conference->title }}" required>
+
+				@error('title')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 		</div>
 
@@ -22,11 +28,23 @@
 			<div class="col-2">{{ __('When') }}<span class="text-danger">*</span></div>
 
 			<div class="col-5">
-				<input id="date" type="date" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($conference->date_time_event)) }}" min="{{ date('Y-m-d') }}" required>
+				<input id="date" type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ date('Y-m-d', strtotime($conference->date_time_event)) }}" min="{{ date('Y-m-d') }}" required>
+			
+				@error('date')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 
 			<div class="col-5">
-				<input id="time" type="time" name="time" value="{{ date('H:i', strtotime($conference->date_time_event)) }}" class="form-control" required>
+				<input id="time" type="time" name="time" value="{{ date('H:i', strtotime($conference->date_time_event)) }}" class="form-control @error('time') is-invalid @enderror" required>
+
+				@error('time')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 		</div>
 
@@ -34,19 +52,31 @@
 			<div class="col-2">{{ __('Address') }}</div>
 
 			<div class="col-5">
-				<input id="latitude" type="number" name="latitude" oninput="updateMap()" class="form-control"
+				<input id="latitude" type="number" name="latitude" oninput="updateMap()" class="form-control @error('latitude') is-invalid @enderror"
 						value="{{ $conference->latitude == NULL ? '' : $conference->latitude }}"
 						min="-85" max="85"
 						step="0.0001"
 						placeholder="Latitude">
+
+				@error('latitude')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 
 			<div class="col-5">
-				<input id="longitude" type="number" name="longitude" class="form-control" oninput="updateMap()"
+				<input id="longitude" type="number" name="longitude" oninput="updateMap()" class="form-control @error('longitude') is-invalid @enderror"
 						value="{{ $conference->longitude == NULL ? '' : $conference->longitude }}"
 						min="-180" max="180"
 						step="0.0001"
 						placeholder="Longitude">
+
+				@error('longitude')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 		</div>
 
@@ -130,14 +160,19 @@
 			<div class="col-2">{{ __('Country') }}<span class="text-danger">*</span></div>
 
 			<div class="col-10">
-				<select id="country" class="form-select" name="country" required>
-				    <option value="" disabled selected>{{ __('Choose country') }}</option>
+				<select id="country" class="form-select @error('country') is-invalid @enderror" name="country" required>
 				    <option value="{{ $conference->country }}" selected>{{ $conference->country }}</option>
 
 				    @foreach ($countries as $country)
 				    	<option value="{{ $country->name }}">{{ $country->name }}</option>
 				    @endforeach
 				</select>
+
+				@error('country')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 		</div>
 

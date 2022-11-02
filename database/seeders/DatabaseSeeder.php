@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            //CountriesTableSeeder::class,
-            //ConferencesTableSeeder::class,
+            CountriesTableSeeder::class,
+            ConferencesTableSeeder::class,
             AdminSeeder::class,
         ]);
     }

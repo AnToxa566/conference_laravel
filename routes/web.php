@@ -33,4 +33,9 @@ Route::group(['namespace' => 'Conference'], function () {
     Route::get('/conferences/{conference}', [App\Http\Controllers\ConferenceController::class, 'show'])->name('conferences.show');
 });
 
+Route::group(['namespace' => 'User'], function () {
+    Route::post('/users/join/{user}', [App\Http\Controllers\UserController::class, 'join'])->name('users.join');
+    Route::post('/users/cancel/{user}', [App\Http\Controllers\UserController::class, 'cancel'])->name('users.cancel');
+});
+
 Auth::routes();
