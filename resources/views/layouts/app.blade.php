@@ -19,7 +19,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
+    
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -88,6 +88,6 @@
     </div>
 
     <!-- Google Maps API JS -->
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUH_gJhMm19A-BF1KDzmtNX7eiaZbpW1g&callback=initMap&v=weekly" defer></script>
+	<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUH_gJhMm19A-BF1KDzmtNX7eiaZbpW1g&callback=initMap&v=weekly"></script>
 </body>
 </html>

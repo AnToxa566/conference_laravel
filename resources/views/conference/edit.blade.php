@@ -82,81 +82,9 @@
 
 		<div class="row mb-4">
 			<div id="map" class="col-10 offset-2 shadow-sm rounded" style="height: 300px"></div>
-
-			<script type="text/javascript">
-				var input_lat = document.getElementById('latitude');
-				var input_lng = document.getElementById('longitude');
-
-				var map, marker;
-				var latitude, longitude;
-
-				function initMap() {
-					marker = new google.maps.Marker({
-						draggable: true
-					});
-
-					marker.addListener("dragend", () => {
-					    input_lat.value = marker.getPosition().lat().toPrecision(6);
-			    		input_lng.value = marker.getPosition().lng().toPrecision(6);
-					});
-
-					<?php
-						if ($conference->latitude == NULL || $conference->longitude == NULL) {
-							?>
-								pos = { lat: 50.450087, lng: 30.524010 }
-								opt = { center: pos, zoom: 12 }
-							<?php
-						}
-						else {
-							?>
-								pos = { lat: <?= $conference->latitude ?>, 
-										lng: <?= $conference->longitude ?> }
-								opt = { center: pos, zoom: 15 }
-
-								marker.setPosition(pos);
-							<?php
-						}
-					?>
-
-					map = new google.maps.Map(document.getElementById("map"), opt);
-					marker.setMap(map);
-
-					map.addListener("click", (e) => {
-						marker.setMap(map);
-
-						marker.setPosition(e.latLng);
-						map.panTo(e.latLng);
-
-					    input_lat.value = marker.getPosition().lat().toPrecision(6);
-			    		input_lng.value = marker.getPosition().lng().toPrecision(6);
-					});
-				}
-
-				function updateMap() {
-					if (input_lat.value == '' || input_lng.value == '') {
-						marker.setMap(null);
-					}
-					else {
-						marker.setMap(map);
-
-						latitude = input_lat.value;
-						longitude = input_lng.value;
-
-						latitude = (latitude && +latitude) || 50.450087;
-						longitude = (longitude && +longitude) || 30.524010;
-
-						map.setCenter({
-					        lat: latitude,
-					        lng: longitude
-					    });
-
-					    marker.setPosition({lat: latitude, lng: longitude});
-					}
-				}
-			</script>
 		</div>
 
-		<div class="row mb-4 align-items-center">
+		<div class="row mb-4 align-items-center border-bottom pb-4">
 			<div class="col-2">{{ __('Country') }}<span class="text-danger">*</span></div>
 
 			<div class="col-10">
@@ -176,7 +104,7 @@
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row border-bottom pb-4">
 			<div class="col-2">
 				<a href="{{ url()->previous() }}">
 					<button type="button" class="btn btn-primary p-2 rounded shadow-sm w-100" style="font-size: 14px;">{{ __('Back') }}</button>
@@ -189,13 +117,88 @@
 		</div>
 	</form>
 
-	<div class="col-2">
-		<form action="{{ route('conferences.destroy', $conference->id) }}" method="POST">
-			@csrf
-			@method('delete')
+	<div class="row">
+		<div class="col-4">
+			<form action="{{ route('conferences.destroy', $conference->id) }}" method="POST">
+				@csrf
+				@method('delete')
 
-			<input type="submit" value="Delete" class="btn btn-danger p-2 rounded shadow-sm w-100" style="font-size: 14px;">
-		</form>
+				<input type="submit" value="Delete" class="btn btn-danger p-2 rounded shadow-sm w-100" style="font-size: 14px;">
+			</form>
+		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	var input_lat = document.getElementById('latitude');
+	var input_lng = document.getElementById('longitude');
+
+	var map, marker;
+	var latitude, longitude;
+
+	function initMap() {
+		marker = new google.maps.Marker({
+			draggable: true
+		});
+
+		marker.addListener("dragend", () => {
+			input_lat.value = marker.getPosition().lat().toPrecision(6);
+			input_lng.value = marker.getPosition().lng().toPrecision(6);
+		});
+
+		<?php
+			if ($conference->latitude == NULL || $conference->longitude == NULL) {
+				?>
+					pos = { lat: 50.450087, lng: 30.524010 }
+					opt = { center: pos, zoom: 12 }
+				<?php
+			}
+			else {
+				?>
+					pos = { lat: <?= $conference->latitude ?>, 
+							lng: <?= $conference->longitude ?> }
+					opt = { center: pos, zoom: 15 }
+
+					marker.setPosition(pos);
+				<?php
+			}
+		?>
+
+		map = new google.maps.Map(document.getElementById("map"), opt);
+		marker.setMap(map);
+
+		map.addListener("click", (e) => {
+			marker.setMap(map);
+
+			marker.setPosition(e.latLng);
+			map.panTo(e.latLng);
+
+			input_lat.value = marker.getPosition().lat().toPrecision(6);
+			input_lng.value = marker.getPosition().lng().toPrecision(6);
+		});
+	}
+
+	function updateMap() {
+		if (input_lat.value == '' || input_lng.value == '') {
+			marker.setMap(null);
+		}
+		else {
+			marker.setMap(map);
+
+			latitude = input_lat.value;
+			longitude = input_lng.value;
+
+			latitude = (latitude && +latitude) || 50.450087;
+			longitude = (longitude && +longitude) || 30.524010;
+
+			map.setCenter({
+				lat: latitude,
+				lng: longitude
+			});
+
+			marker.setPosition({lat: latitude, lng: longitude});
+		}
+	}
+</script>
+
 @endsection

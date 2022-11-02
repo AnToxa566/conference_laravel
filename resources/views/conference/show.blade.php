@@ -28,36 +28,6 @@
 				</p>
 
 				<div id="map" class="shadow-sm rounded" style="height: 300px"></div>
-
-				<script type="text/javascript">
-					var pos, opt, map, marker;
-
-					function initMap() {
-						<?php 
-							if ($conference->latitude == NULL || $conference->longitude == NULL) {
-								?>
-									pos = { lat: 50.450087, lng: 30.524010 }
-									opt = { center: pos, zoom: 12, }
-								<?php
-							}
-							else {
-								?>
-									pos = { lat: <?= $conference->latitude ?>, 
-											lng: <?= $conference->longitude ?> }
-
-									opt = { center: pos, zoom: 15 }
-
-									marker = new google.maps.Marker({
-										position: pos
-									});
-								<?php
-							}
-						?>
-
-						map = new google.maps.Map(document.getElementById("map"), opt);
-						marker != null ? marker.setMap(map) : marker = null;
-					}
-				</script>
 			</div>
 		</div>
 		@endif
@@ -123,4 +93,21 @@
 		@endif
 	</div>
 </div>
+
+<script type="text/javascript">
+	function initMap() {
+		var pos = { lat: <?= $conference->latitude ?>, 
+				lng: <?= $conference->longitude ?> }
+
+		var opt = { center: pos, zoom: 15 }
+
+		var marker = new google.maps.Marker({
+			position: pos
+		});
+
+		var map = new google.maps.Map(document.getElementById("map"), opt);
+		marker.setMap(map);
+	}
+</script>
+
 @endsection

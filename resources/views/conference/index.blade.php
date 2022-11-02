@@ -86,7 +86,7 @@
 						<div class="col-2">
 							<a href="{{ route('conferences.edit', $conference->id) }}">
 								<button type="button" class="conference_btn btn btn-primary p-2 rounded shadow-sm w-100" style="font-size: 14px;">
-									{{ __('Update') }}
+									{{ __('Edit') }}
 								</button>
 							</a>
 						</div>
